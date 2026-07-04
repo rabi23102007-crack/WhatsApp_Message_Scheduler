@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from scheduler import send_whatsapp_message
 from tkinter import messagebox
+from tkcalendar import DateEntry
 
 
 class WhatsAppSchedulerGUI:
@@ -64,10 +65,11 @@ class WhatsAppSchedulerGUI:
         self.date_label.pack(pady=(20, 5))
 
         # Date Entry
-        self.date_entry = ctk.CTkEntry(
+        self.date_entry = DateEntry(
             self.app,
-            width=200,
-            placeholder_text="DD/MM/YYYY"
+            width=18,
+            date_pattern="dd/mm/yyyy",
+            font=("Arial",14)
         )
         self.date_entry.pack()
 
@@ -97,7 +99,7 @@ class WhatsAppSchedulerGUI:
     def schedule_message(self):
         phone = self.phone_entry.get().strip()
         message = self.message_box.get("1.0", "end").strip()
-        date = self.date_entry.get().strip()
+        date = self.date_entry.get()
         time = self.time_entry.get().strip()
 
     # Validation
