@@ -127,11 +127,30 @@ class WhatsAppSchedulerGUI:
         time = f"{hour:02d}:{minute:02d}"
 
     # Validation
-        if phone == "":
-           messagebox.showerror("Error", "Please enter phone number.")
-           return
+        
+    #phone number validation
+        if not phone.startswith("+91"):
+            messagebox.showerror(
+                "Invalid Number",
+                "Phone number must start with +91."
+            )
+            return
+        
+        if len(phone) !=13:
+            messagebox.showerror(
+                "Invalid Number",
+                "Phone number must contain 10 digits after +91."
 
-        if message == "":
+            )
+            return
+        
+        if not phone [3:].isdigit():
+            messagebox.showerror(
+                "Invalid Number",
+                "Phone number should contain only digits after +91."
+            )
+            return
+        if  not message :
            messagebox.showerror("Error", "Please enter message.")
            return
 
@@ -139,9 +158,7 @@ class WhatsAppSchedulerGUI:
            messagebox.showerror("Error", "Please enter date.")
            return
 
-        if time == "":
-           messagebox.showerror("Error", "Please enter time.")
-           return
+        
 
         print("Phone :", phone)
         print("Message :", message)
