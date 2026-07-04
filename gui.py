@@ -81,13 +81,35 @@ class WhatsAppSchedulerGUI:
         )
         self.time_label.pack(pady=(20, 5))
 
-        # Time Entry
-        self.time_entry = ctk.CTkEntry(
-            self.app,
-            width=200,
-            placeholder_text="HH:MM"
+        # Time Frame
+        self.time_frame = ctk.CTkFrame(self.app, fg_color="transparent")
+        self.time_frame.pack()
+        #Hour Combobox
+        self.hour_combo = ctk.CTkComboBox(
+            self.time_frame,
+            values=[f"{i:02d}" for i in range(24)],
+            width=80
+    
         )
-        self.time_entry.pack()
+        self.hour_combo.set("00")
+        self.hour_combo.pack(side="left", padx=5)
+
+        #colon label
+        self.colon_label = ctk.CTkLabel(
+            self.time_frame,
+            text=":",
+            font= ("Arial", 18, "bold")
+        )
+        self.colon_label.pack(side="left")
+
+        #Minute combobox
+        self.minute_combo = ctk.CTkComboBox(
+            self.time_frame,
+            values=[f"{i:02d}" for i in range(60)],
+            width=80
+        )
+        self.minute_combo.set("00")
+        self.minute_combo.pack(side="left", padx=5)
 
         # Schedule Button
         self.schedule_button = ctk.CTkButton(
@@ -100,7 +122,9 @@ class WhatsAppSchedulerGUI:
         phone = self.phone_entry.get().strip()
         message = self.message_box.get("1.0", "end").strip()
         date = self.date_entry.get()
-        time = self.time_entry.get().strip()
+        hour =int(self.hour_combo.get())
+        minute = int(self.minute_combo.get())
+        time = f"{hour:02d}:{minute:02d}"
 
     # Validation
         if phone == "":
@@ -125,8 +149,7 @@ class WhatsAppSchedulerGUI:
         print("Time :", time)
 
     # Time ko Hour aur Minute me convert karo
-        hour, minute = map(int, time.split(":"))
-
+        
     # WhatsApp Message Send
         send_whatsapp_message(phone, message, hour, minute)
 
