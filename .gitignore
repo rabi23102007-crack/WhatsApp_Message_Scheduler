@@ -11,3 +11,13 @@ venv/
 
 # Database
 PyWhatKit_DB.txt
+
+# Build Files
+build/
+dist/
+
+# Database
+messages.db
+
+# PyInstaller
+*.spec
