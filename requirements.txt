@@ -1,5 +1,3 @@
 customtkinter
 pywhatkit
 tkcalendar
-tkinter
-sys
